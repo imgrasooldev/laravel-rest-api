@@ -4,15 +4,15 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Invoice;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Http\Resources\V1\InvoiceResource;
 use App\Http\Resources\V1\InvoiceCollection;
 use App\Filters\V1\InvoicesFilter;
+use App\Http\Controllers\Api\BaseController;
 use Illuminate\Support\Arr;
 use App\Http\Requests\V1\BulkStoreInvoiceRequest;
 
 
-class InvoiceController extends Controller
+class InvoiceController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -30,7 +30,6 @@ class InvoiceController extends Controller
             $invoices = Invoice::where($queryItems)->paginate();
 
             return new InvoiceCollection($invoices->appends($request->query()));
-
         }
     }
 
