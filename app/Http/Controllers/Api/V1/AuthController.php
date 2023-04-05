@@ -26,7 +26,7 @@ class AuthController extends BaseController
     public function signup(SignUpRequest $request)
     {
         $user = User::create($request->all());
-        $success['token'] =  $user->createToken('basic-token', ['read'])->plainTextToken;
+        $success['token'] =  $user->createToken('admin-token', ['create', 'read', 'update', 'delete'])->plainTextToken;
         $success['user'] =  new UserResource($user);
 
         return $this->sendResponse($success, 'User created successfully.');

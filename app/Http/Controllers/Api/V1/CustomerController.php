@@ -92,6 +92,6 @@ class CustomerController extends BaseController
     public function destroy(Customer $customer)
     {
         $customer->delete();
-        return $this->sendResponse([], 'Customer deleted.');
+        return $this->sendResponse([], 'Customer deleted successfully.');
     }
 }

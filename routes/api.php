@@ -33,8 +33,8 @@ Route::group([
 
 
     Route::withoutMiddleware('auth:sanctum')->group(function () {
-        Route::post('login', [AuthController::class, 'signin'])->withoutMiddleware('auth:sanctum');
-        Route::post('register', [AuthController::class, 'signup'])->withoutMiddleware('auth:sanctum');
+        Route::post('login', [AuthController::class, 'signin']);
+        Route::post('register', [AuthController::class, 'signup']);
     });
 
 
