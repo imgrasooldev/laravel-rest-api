@@ -27,6 +27,5 @@ class CustomerResource extends JsonResource
             'invoicesCount' => $this->whenCounted('invoices'),
             'invoices' => InvoiceResource::collection($this->whenLoaded('invoices')),
         ];
-
     }
 }
