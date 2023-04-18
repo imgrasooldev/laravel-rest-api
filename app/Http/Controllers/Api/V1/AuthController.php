@@ -28,7 +28,7 @@ class AuthController extends BaseController
         $user = User::create($request->all());
 
         // To send custom welcome email for testing queues with redis
-        dispatch(new \App\Jobs\EmailJobs\Auth\SendRegisterMailJob());
+        dispatch(new \App\Jobs\EmailJobs\Auth\SendRegisterMailJob($request->email));
         // event(new Registered($user));
 
         $success['token'] =  $user->createToken('admin-token', ['create', 'read', 'update', 'delete'])->plainTextToken;
