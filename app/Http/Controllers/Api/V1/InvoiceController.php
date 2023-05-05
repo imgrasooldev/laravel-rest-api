@@ -54,12 +54,14 @@ class InvoiceController extends BaseController
         //
     }
 
-    public function bulkStore(BulkStoreInvoiceRequest $request) {
-        $bulk = collect($request->all())->map(function($arr, $key) {
+    public function bulkStore(BulkStoreInvoiceRequest $request)
+    {
+        $bulk = collect($request->all())->map(function ($arr, $key) {
             return Arr::except($arr, ['customerId', 'billedDate', 'paidDate']);
         });
 
         Invoice::insert($bulk->toArray());
+        return $this->sendResponse($bulk, 'Bulk invoices created successfully.');
     }
 
     /**

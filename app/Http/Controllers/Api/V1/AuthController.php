@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Api\BaseController;
 use App\Http\Requests\V1\SignUpRequest;
-use App\Http\Resources\v1\UserResource;
+use App\Http\Resources\V1\UserResource;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Auth;
