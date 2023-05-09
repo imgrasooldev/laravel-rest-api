@@ -99,6 +99,28 @@ POST	/api/v1/customers
     					"postalCode": ""
 }
 ```
+
+#### Edit Customers:
+```
+PUT 	/api/v1/customers/{id}
+			Body => {
+                        "name": "",
+                        "type": "B", //I for Individual, B for Business
+                        "email": "",
+                        "address": "",
+                        "city": "",
+                        "state": "",
+                        "postalCode": ""
+                    }
+
+
+PATCH 	/api/v1/customers/{id}
+			Body => {
+                        "name": "",
+                        "type": "B", //I for Individual, B for Business
+                    }
+```
+
 #### Delete Customers:
 ```
 	DELETE 	/api/v1/customers/{id}
