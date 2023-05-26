@@ -10,10 +10,17 @@ use App\Filters\V1\InvoicesFilter;
 use App\Http\Controllers\Api\BaseController;
 use Illuminate\Support\Arr;
 use App\Http\Requests\V1\BulkStoreInvoiceRequest;
-
+use App\Services\Api\V1\InvoiceService;
 
 class InvoiceController extends BaseController
 {
+    private InvoiceService $invoiceService;
+
+    public function __construct(InvoiceService $invoiceService)
+    {
+        $this->invoiceService = $invoiceService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -59,8 +66,7 @@ class InvoiceController extends BaseController
         $bulk = collect($request->all())->map(function ($arr, $key) {
             return Arr::except($arr, ['customerId', 'billedDate', 'paidDate']);
         });
-
-        Invoice::insert($bulk->toArray());
+        $this->invoiceService->storeBulkInvoices($bulk);
         return $this->sendResponse($bulk, 'Bulk invoices created successfully.');
     }
 

@@ -10,10 +10,17 @@ use App\Filters\V1\CustomersFilter;
 use App\Http\Controllers\Api\BaseController;
 use App\Http\Requests\V1\StoreCustomerRequest;
 use App\Http\Requests\V1\UpdateCustomerRequest;
+use App\Services\Api\V1\CustomerService;
 
 
 class CustomerController extends BaseController
 {
+    private CustomerService $customerService;
+
+    public function __construct(CustomerService $customerService)
+    {
+        $this->customerService = $customerService;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -45,8 +52,7 @@ class CustomerController extends BaseController
      */
     public function store(StoreCustomerRequest $request)
     {
-        // return new CustomerResource(Customer::create($request->all()));
-        $success = new CustomerResource(Customer::create($request->all()));
+        $success = new CustomerResource($this->customerService->createCustomer($request));
         return $this->sendResponse($success, 'Customers created successfully.');
     }
 
@@ -79,7 +85,7 @@ class CustomerController extends BaseController
      */
     public function update(UpdateCustomerRequest $request, Customer $customer)
     {
-        new CustomerResource($customer->update($request->all()));
+        new CustomerResource($this->customerService->updateCustomer($request, $customer));
         return $this->sendResponse($customer, 'Customer updated successfully.');
     }
 
